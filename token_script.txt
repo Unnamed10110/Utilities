@@ -1,0 +1,30 @@
+let email_var="user0@gmail.com";
+let password_var="Aa.123456";
+console.log(pm.environment.get("WebApiAutores_login"));
+
+let login_request={
+    url: pm.environment.get("WebApiAutores_login"),
+    method: "POST",
+    header: {
+        "accept": "text/plain" ,
+        "Content-Type": "application/json"
+    },
+    body:{
+        mode: 'raw',
+        raw: JSON.stringify({ 
+            "email": email_var,
+            "password": password_var
+        })
+    }
+    
+}
+
+pm.sendRequest(login_request, function (err, res) {
+    pm.collectionVariables.set("token_gral", res.json().token);
+    console.log("--------------------------"+res.json().token+"--------------------------")
+});
+
+
+pm.collectionVariables.set("GUID", Math.round(Math.random()*100));
+
+//console.log(pm.collectionVariables.get("GUID"));

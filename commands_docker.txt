@@ -1,0 +1,83 @@
+// intance
+docker compose -f "docker-compose.yaml" up
+
+//drop
+docker compose down
+
+//clean instance
+docker compose up -d
+
+//start
+docker compose start
+
+//stop
+docker compose stop
+
+//containers intances
+docker ps
+
+// execute image shell
+docker exec -it <container-id> bash
+
+// update container
+docker-compose pull
+
+	
+	// in mongo
+	mongosh mongodb://localhost:27017 -u "username" -p "c"
+	//shows databases wich contains collections
+	show dbs;
+	// switch or create db
+	use dbname;
+	//db.help() -- all methods
+	
+	// show collections
+	show collections	
+
+	// insert
+	db.student.insert(document_name)
+	db.student.insertMany(document_name)
+	
+	//find
+	db.student.find().pretty()
+	
+	// select * from student where firstName="Cally";
+	db.student.find({firstName:"Cally"}).pretty()	
+
+	// select firstName from student where firstName="Cally"; //with projection
+	db.student.find({CRITERIA},{PROJECTION}).pretty()
+	db.student.find({firstName:"Cally"},{firstName:1, lastName:1}).pretty()		
+	// count
+	db.student.find().pretty().count()
+	
+	//update
+	db.student.update({_id: 1}, {$set: {firstName:"Maria"})
+
+	//remove property(collum)
+	db.student.update({_id: 1}, {$unset: {lasttName:1})
+
+	// increment
+	db.student.update({_id: 1}, {$inc: {totalSpent:999}})
+
+	// remove value from document property(document wich property is an array)
+	db.student.update({_id: 1}, {$pull: {favouritesSubjects:"it"}})
+
+	// add value from document property(document wich property is an array)
+	db.student.update({_id: 1}, {$push: {favouritesSubjects:"it"}})
+
+	// add property to document
+	db.student.update({_id: 1},{$set: {'anotherProp' : "hello" }})
+
+	//delete
+	db.student.deleteOne({_id:1})
+	db.student.deleteOne({gender:"M"})
+	
+	//delete all	
+	db.student.deleteMany({})
+
+	// You can use the $ keyword. This will allow you to perform queries on all the elements 		in an inner array.
+
+	For example: db.collection.find({'users.assigned.$.status': 'active'})
+
+	
+	
